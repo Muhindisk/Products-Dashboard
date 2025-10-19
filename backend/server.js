@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://products-dashboard-molf.vercel.app/", // Removed trailing slash
+  "https://products-dashboard-molf.vercel.app",
   process.env.FRONTEND_URL // Add your production frontend URL as env variable
 ].filter(Boolean);
 
@@ -77,5 +77,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
 
 module.exports = app; 
