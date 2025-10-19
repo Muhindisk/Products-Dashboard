@@ -1,6 +1,6 @@
 // API functions for product operations
 
-const API_BASE_URL = "http://localhost:5000/api/products";
+const API_BASE_URL = "https://products-dashboard-psi.vercel.app/";
 
 // Fetch all products
 export async function fetchProducts() {
