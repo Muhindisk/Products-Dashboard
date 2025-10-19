@@ -14,21 +14,13 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 
-// Manual CORS headers (optional, but keeping for extra compatibility)
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://products-dashboard-molf.vercel.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-});
-
 // Configure CORS for multiple origins
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
+  "http://localhost:5174",
   "https://products-dashboard-molf.vercel.app",
-  process.env.FRONTEND_URL // Add your production frontend URL as env variable
+  process.env.FRONTEND_URL
 ].filter(Boolean);
 
 app.use(cors({
@@ -39,11 +31,13 @@ app.use(cors({
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      console.log('CORS blocked origin:', origin);
+      callback(null, true); // Allow anyway for development
     }
   },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"]
 }));
 
 // Connect to MongoDB

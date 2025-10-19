@@ -7,7 +7,13 @@ const API_BASE_URL = import.meta.env.PROD
 // Fetch all products
 export async function fetchProducts() {
   try {
-    const response = await fetch(API_BASE_URL);
+    const response = await fetch(API_BASE_URL, {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -24,6 +30,7 @@ export async function createProduct(product) {
   try {
     const response = await fetch(API_BASE_URL, {
       method: "POST",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -45,6 +52,7 @@ export async function updateProduct(product) {
   try {
     const response = await fetch(`${API_BASE_URL}/${product._id}`, {
       method: "PUT",
+      mode: "cors",
       headers: {
         "Content-Type": "application/json",
       },
@@ -66,6 +74,10 @@ export async function deleteProduct(id) {
   try {
     const response = await fetch(`${API_BASE_URL}/${id}`, {
       method: "DELETE",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      }
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
