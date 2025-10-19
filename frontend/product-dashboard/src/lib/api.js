@@ -1,6 +1,8 @@
 // API functions for product operations
 
-const API_BASE_URL = "https://products-dashboard-psi.vercel.app/";
+const API_BASE_URL = import.meta.env.PROD 
+  ? "https://products-dashboard-psi.vercel.app/api/products"  // Production backend
+  : "http://localhost:5000/api/products";  // Local development
 
 // Fetch all products
 export async function fetchProducts() {
