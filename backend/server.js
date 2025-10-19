@@ -14,7 +14,7 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 app.use(cors({
-  origin: "http://localhost:5173", // Adjust according to your frontend port
+  origin: "https://products-dashboard-molf.vercel.app/", // Adjust according to your frontend port
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
