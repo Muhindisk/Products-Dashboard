@@ -7,6 +7,12 @@ This project is a fullstack MERN application consisting of:
 
 ---
 
+## Hosted on Vercel
+The frontend is hosted on Vercel and connected to the backend API.
+Access the live application here: [Products Dashboard](https://products-dashboard-molf.vercel.app)
+
+---
+
 ## Features
 - List all products
 - Add new products
