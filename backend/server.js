@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
-  "https://products-dashboard-molf.vercel.app/", // Replace with your actual frontend URL
+  "https://products-dashboard-molf.vercel.app/", // Removed trailing slash
   process.env.FRONTEND_URL // Add your production frontend URL as env variable
 ].filter(Boolean);
 
@@ -55,6 +55,20 @@ app.use('/api/products', require('./routes/productRoutes'));
 // Default route (Home Page)
 app.get("/", (req, res) => {
   res.send("Welcome to the Product API! Go to /api/products to see all products.");
+});
+
+// Error handling middleware (must be after all routes)
+app.use((err, req, res, next) => {
+  console.error('Error:', err.stack);
+  res.status(500).json({ 
+    message: 'Internal Server Error',
+    error: process.env.NODE_ENV === 'development' ? err.message : 'Something went wrong'
+  });
+});
+
+// Handle 404 - Route not found
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
 });
 
 // Start the server
